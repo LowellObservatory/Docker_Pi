@@ -1,3 +1,6 @@
 [submodule "DomeSpyCamera/PiCamHelpers"]
 	path = DomeSpyCamera/PiCamHelpers
 	url = https://github.com/LowellObservatory/PiCamHelpers
+[submodule "DomeSpyCamera/ligmos"]
+	path = DomeSpyCamera/ligmos
+	url = https://github.com/LowellObservatory/ligmos
