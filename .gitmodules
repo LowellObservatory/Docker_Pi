@@ -1,0 +1,3 @@
+[submodule "DomeSpyCamera/PiCamHelpers"]
+	path = DomeSpyCamera/PiCamHelpers
+	url = https://github.com/LowellObservatory/PiCamHelpers
