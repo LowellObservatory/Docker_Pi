@@ -50,4 +50,5 @@ WORKDIR /home/lig/PiCamHelpers
 RUN pip3 install -e .
 
 USER lig
+# NOTE: The config file for snapper must be bound in at runtime
 CMD ["python3", "snapper.py"]
