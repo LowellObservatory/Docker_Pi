@@ -101,12 +101,15 @@ do
 
 done
 
-backdir="$DOCKDEVDIR/influxbackupdump"
-if [ -d "$backdir" ]; then
-    echo "$backdir is good!"
+# This is the required animation subdirectory for snapper
+#   It's bind mounted into the container, so if the anim/ subdir
+#   doesn't exist then it'll fail in the container too
+animdir="$DOCKDEVDIR/snapper/anim"
+if [ -d "$animdir" ]; then
+    echo "$animdir is good!"
 else
-    echo "$backdir is nogood!"
-    mkdir "$backdir"
+    echo "$animdir is nogood!"
+    mkdir "$animdir"
     echo "...so I made it good."
 fi
 
