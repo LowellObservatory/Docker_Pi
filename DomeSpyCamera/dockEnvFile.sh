@@ -43,10 +43,6 @@ echo "VIDID=$VIDID" >> .env
 echo "I2CID=$I2CID" >> .env
 echo "SPIID=$SPIID" >> .env
 echo "GPIOID=$GPIOID" >> .env
-#echo "# Component versions to use" >> .env
-#echo "TELEGRAF_VERSION=$TELEGRAF_VERSION" >> .env
-echo "INFLUXDB_VERSION=$INFLUXDB_VERSION" >> .env
-#echo "CHRONOGRAF_VERSION=$CHRONOGRAF_VERSION" >> .env
 
 echo "./.env contents:"
 echo "==========="
