@@ -23,8 +23,8 @@ services:
       - /dev/vcsm:/dev/vcsm
     volumes:
       - /opt/vc/lib:/opt/vc/lib
-      - ${DCDATADIR}/snapper:/home/lig/snaps
-      - ${DCDATADIR}/logs/snapper/:/home/lig/logs/
+      - ${DCDATADIR}/snapper:/home/lig/PiCamHelpers/snaps
+      - ${DCDATADIR}/logs/snapper/:/home/lig/PiCamHelpers/logs/
     restart: always
     networks:
       - default
