@@ -104,7 +104,7 @@ done
 # This is the required animation subdirectory for snapper
 #   It's bind mounted into the container, so if the anim/ subdir
 #   doesn't exist then it'll fail in the container too
-animdir="$DOCKDEVDIR/snapper/anim"
+animdir="$DOCKDATADIR/snapper/anim"
 if [ -d "$animdir" ]; then
     echo "$animdir is good!"
 else
