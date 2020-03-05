@@ -1,8 +1,8 @@
 version: '3'
 services:
-  picam:
+  snapper:
     build:
-      context: './picam/'
+      context: '.'
       dockerfile: Dockerfile
       args:
         - userid=${DCUSERID}
@@ -11,12 +11,12 @@ services:
         - i2cid=${I2CID}
         - spiid=${SPIID}
         - gpioid=${GPIOID}
-    image: 'picam'
+    image: 'snapper'
     ports:
       # This one is only needed if using the streamer which
       #   uses the basic python http server
       - 8675:8675
-    container_name: 'picam'
+    container_name: 'snapper'
     user: ${DCUSERID}
     devices:
       - /dev/vchiq:/dev/vchiq
@@ -35,13 +35,13 @@ services:
     ports:
       - 80:80
     volumes:
-      - ${DCDEVDIR}/picam/www:/home/lig/www
+      - ${DCDEVDIR}/PiCamHelpers/www:/home/lig/www
       - ${DCDATADIR}/snapper:/home/lig/www/snapshots
 #      - ${DCDATADIR}/logs/snapper:/home/lig/snaps/logs/
       - ${DCDEVDIR}/config/nginx.conf:/etc/nginx/nginx.conf
       - ${DCDEVDIR}/config/nginx-app.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - picam
+      - snapper
     restart: always
     networks:
       - default
