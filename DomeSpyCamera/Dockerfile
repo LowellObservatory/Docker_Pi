@@ -40,11 +40,11 @@ RUN mkdir /home/lig/www/ && mkdir /home/lig/snaps/ && \
 USER root
 WORKDIR /home/lig/
 
-COPY --chown=lig:lig ligmos /home/lig/
+COPY --chown=lig:lig ./ligmos .
 WORKDIR /home/lig/ligmos
 RUN pip3 install -e .
 
-COPY --chown=lig:lig PiCamHelpers /home/lig/
+COPY --chown=lig:lig ./PiCamHelpers .
 WORKDIR /home/lig/PiCamHelpers
 RUN pip3 install -e .
 
