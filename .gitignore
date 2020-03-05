@@ -1,13 +1,6 @@
 *.swp
 *.env
-abu.conf
-iago.conf
-mandos.conf
-alfred.conf
-mrfreeze.conf
-wadsworth.conf
 passwords.conf
-nfsMounts.conf
 nginx_routing.conf
 *.mib
 
@@ -21,10 +14,6 @@ Gemfile.lock
 *.gem
 vendor
 serviceTable.md
-alfred_extraPings.conf
 influxbackupdump
-NightWatch/config/
-
-*.conf
 
 mibs/
