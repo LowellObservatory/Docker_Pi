@@ -36,6 +36,8 @@ USER lig
 RUN mkdir /home/lig/www/ && mkdir /home/lig/snaps/ && \
     mkdir /home/lig/snaps/anim/ && mkdir /home/lig/logs
 
+# Need to install as root because a user (site-packages) install isn't avail.
+USER root
 WORKDIR /home/lig/
 
 COPY --chown=lig:lig ligmos /home/lig/
@@ -46,4 +48,5 @@ COPY --chown=lig:lig PiCamHelpers /home/lig/
 WORKDIR /home/lig/PiCamHelpers
 RUN pip3 install -e .
 
+USER lig
 CMD ["python3", "snapper.py"]
