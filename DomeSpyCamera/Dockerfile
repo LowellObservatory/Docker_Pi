@@ -1,4 +1,4 @@
-FROM balenalib/raspberrypi3-python:3.7
+FROM balenalib/raspberrypi3-python:3.7.4
 
 USER root
 
