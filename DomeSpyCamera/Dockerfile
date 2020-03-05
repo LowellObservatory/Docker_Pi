@@ -38,13 +38,14 @@ RUN mkdir /home/lig/www/ && mkdir /home/lig/snaps/ && \
 
 # Need to install as root because a user (site-packages) install isn't avail.
 USER root
-WORKDIR /home/lig/
 
+WORKDIR /home/lig/
 COPY --chown=lig:lig ./ligmos ./ligmos
+COPY --chown=lig:lig ./PiCamHelpers ./PiCamHelpers
+
 WORKDIR /home/lig/ligmos
 RUN pip3 install -e .
 
-COPY --chown=lig:lig ./PiCamHelpers ./PiCamHelpers
 WORKDIR /home/lig/PiCamHelpers
 RUN pip3 install -e .
 
