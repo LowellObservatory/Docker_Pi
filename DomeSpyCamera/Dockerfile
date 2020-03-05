@@ -38,10 +38,12 @@ RUN mkdir /home/lig/www/ && mkdir /home/lig/snaps/ && \
 
 WORKDIR /home/lig/
 
-# NEED TO ADD IN LIGMOS HERE
-# NEED TO ADD IN PiCamHelpers pip install here
+COPY --chown=lig:lig ligmos /home/lig/
+WORKDIR /home/lig/ligmos
+RUN pip3 install -e .
 
-COPY --chown=lig:lig snapper.py .
-COPY --chown=lig:lig streamer.py .
+COPY --chown=lig:lig PiCamHelpers /home/lig/
+WORKDIR /home/lig/PiCamHelpers
+RUN pip3 install -e .
 
-CMD ["python", "snapper.py"]
+CMD ["python3", "snapper.py"]
