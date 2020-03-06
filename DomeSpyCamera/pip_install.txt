@@ -2,6 +2,7 @@ numpy
 matplotlib
 astropy
 pillow
+paramiko
 psutil
 pylint
 stomp.py
@@ -18,3 +19,4 @@ bs4
 pytz
 schedule
 memory_profiler
+picamera
