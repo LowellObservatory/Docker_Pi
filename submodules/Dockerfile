@@ -32,8 +32,6 @@ RUN apt update && apt install -y libatlas3-base libgfortran5 vim
 RUN pip3 install --upgrade pip setuptools
 
 USER lig
-RUN mkdir /home/lig/www/ && mkdir /home/lig/snaps/ && \
-    mkdir /home/lig/snaps/anim/ && mkdir /home/lig/logs
 
 # Need to install as root because a user (site-packages) install isn't avail.
 # We use a pip_install file to install most things to save time via caching
@@ -53,5 +51,8 @@ WORKDIR /home/lig/PiCamHelpers
 RUN pip3 install -e .
 
 USER lig
-# NOTE: The config file for snapper must be bound in at runtime
-CMD ["python3", "snapper.py"]
+WORKDIR /home/lig
+RUN mkdir /home/lig/www/ && mkdir /home/lig/snaps/ && \
+    mkdir /home/lig/snaps/anim/ && mkdir /home/lig/logs
+
+CMD ["/bin/bash"]

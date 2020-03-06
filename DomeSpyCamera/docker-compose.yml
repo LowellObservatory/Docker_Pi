@@ -2,7 +2,7 @@ version: '3'
 services:
   snapper:
     build:
-      context: '.'
+      context: '../submodules/'
       dockerfile: Dockerfile
       args:
         - userid=${DCUSERID}
@@ -11,7 +11,7 @@ services:
         - i2cid=${I2CID}
         - spiid=${SPIID}
         - gpioid=${GPIOID}
-    image: 'snapper'
+    image: 'ligpibase'
     ports:
       # This one is only needed if using the streamer which
       #   uses the basic python http server
@@ -27,6 +27,8 @@ services:
       - ${DCDATADIR}/logs/snapper/:/home/lig/PiCamHelpers/logs/
       - ${DCDEVDIR}/config/picamSettings.conf:/home/lig/PiCamHelpers/config/picamSettings.conf
     restart: always
+    working_dir: /home/lig/PiCamHelpers/
+    command: ["python3", "snapper.py"]
     networks:
       - default
 
