@@ -38,7 +38,7 @@ USER lig
 #   since the dependencies don't change often, but my libraries might
 USER root
 WORKDIR /home/lig/
-COPY --chown=lig:lig ./pip_install.txt .
+COPY --chown=lig:lig ./config/pip_install.txt .
 RUN pip3 install --no-cache-dir -r pip_install.txt
 
 COPY --chown=lig:lig ./submodules/ligmos ./ligmos
