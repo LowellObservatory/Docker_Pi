@@ -30,16 +30,19 @@ COPY ./config/pip.conf /etc/pip.conf
 RUN apt update && apt install -y libatlas3-base libgfortran5 vim
 
 RUN pip3 install --upgrade pip setuptools
-RUN pip3 install matplotlib picamera
 
 USER lig
 RUN mkdir /home/lig/www/ && mkdir /home/lig/snaps/ && \
     mkdir /home/lig/snaps/anim/ && mkdir /home/lig/logs
 
 # Need to install as root because a user (site-packages) install isn't avail.
+# We use a pip_install file to install most things to save time via caching
+#   since the dependencies don't change often, but my libraries might
 USER root
-
 WORKDIR /home/lig/
+COPY --chown=lig:lig ./pip_install.txt .
+RUN pip3 install --no-cache-dir -r pip_install.txt
+
 COPY --chown=lig:lig ./ligmos ./ligmos
 COPY --chown=lig:lig ./PiCamHelpers ./PiCamHelpers
 
