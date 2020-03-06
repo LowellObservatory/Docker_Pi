@@ -1,0 +1,9 @@
+[submodule "submodules/PiCamHelpers"]
+	path = submodules/PiCamHelpers
+	url = https://github.com/LowellObservatory/PiCamHelpers
+[submodule "submodules/ligmos"]
+	path = submodules/ligmos
+	url = https://github.com/LowellObservatory/ligmos
+[submodule "submodules/JohnnyFive"]
+	path = submodules/JohnnyFive
+	url = https://github.com/LowellObservatory/JohnnyFive
