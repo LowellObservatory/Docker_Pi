@@ -38,7 +38,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - ${DCDEVDIR}/PiCamHelpers/www:/home/lig/www
+      - ${DCDEVDIR}/../submodules/PiCamHelpers/www:/home/lig/www
       - ${DCDATADIR}/snapper:/home/lig/www/snapshots
 #      - ${DCDATADIR}/logs/snapper:/home/lig/snaps/logs/
       - ${DCDEVDIR}/config/nginx.conf:/etc/nginx/nginx.conf
