@@ -19,4 +19,4 @@ influxbackupdump
 mibs/
 
 hancon.js
-DomeSpyCamera/config/picamSettings.conf
+SpyCamera/config/picamSettings.conf
