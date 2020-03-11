@@ -19,5 +19,6 @@ influxbackupdump
 mibs/
 
 hancon.js
+SpyCamera/config/nginx-app.conf
 SpyCamera/config/picamSettings.conf
 Ultimonitor/config/ultimonitor.conf
