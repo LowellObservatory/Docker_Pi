@@ -1,6 +1,6 @@
 # Docker_PiMesa
-Repository of container files for Lowell codes running out at the
-Anderson Mesa site on Raspberry Pis.
+Repository of container files for Lowell codes running on various Raspberry Pis, 
+spread across Lowell Observatory.
 
 ## Stuff
 - InfluxDB
