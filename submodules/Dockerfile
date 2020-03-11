@@ -41,18 +41,29 @@ WORKDIR /home/lig/
 COPY --chown=lig:lig ./config/pip_install.txt .
 RUN pip3 install --no-cache-dir -r pip_install.txt
 
+WORKDIR /home/lig/
 COPY --chown=lig:lig ./ligmos ./ligmos
-COPY --chown=lig:lig ./PiCamHelpers ./PiCamHelpers
-
 WORKDIR /home/lig/ligmos
 RUN pip3 install -e .
 
+WORKDIR /home/lig/
+COPY --chown=lig:lig ./PiCamHelpers ./PiCamHelpers
 WORKDIR /home/lig/PiCamHelpers
 RUN pip3 install -e .
+
+WORKDIR /home/lig/
+COPY --chown=lig:lig ./JohnnyFive ./JohnnyFive
+WORKDIR /home/lig/JohnnyFive
+RUN pip3 install -e .
+
+# Ultimonitor requires no installation
+WORKDIR /home/lig/
+COPY --chown=lig:lig ./Ultimonitor ./Ultimonitor
 
 USER lig
 WORKDIR /home/lig
 RUN mkdir /home/lig/www/ && mkdir /home/lig/snaps/ && \
-    mkdir /home/lig/snaps/anim/ && mkdir /home/lig/logs
+    mkdir /home/lig/snaps/anim/ && mkdir /home/lig/logs && \
+    mkdir /home/lig/Ultimonitor/logs/ && mkdir /home/lig/Ultimonitor/ultisnaps/
 
 CMD ["/bin/bash"]

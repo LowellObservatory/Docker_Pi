@@ -1,0 +1,55 @@
+version: '3'
+services:
+  clausius:
+    build:
+      context: '../submodules/'
+      dockerfile: Dockerfile
+      args:
+        - userid=${DCUSERID}
+        - groupid=${DCGRPID}
+        - vidid=${VIDID}
+        - i2cid=${I2CID}
+        - spiid=${SPIID}
+        - gpioid=${GPIOID}
+    image: 'ligpibase'
+    container_name: 'clausius'
+    user: ${DCUSERID}
+    volumes:
+      - ${DCDATADIR}/logs/ultimonitor/:/home/lig/Ultimonitor/logs/
+      - ${DCDEVDIR}/config/ultimonitor.conf:/home/lig/Ultimonitor/config/ultimonitor.conf
+    restart: always
+    working_dir: /home/lig/Ultimonitor/
+    command: ["python3", "Clausius.py"]
+    networks:
+      - default
+
+  printzini:
+    build:
+      context: '../submodules/'
+      dockerfile: Dockerfile
+      args:
+        - userid=${DCUSERID}
+        - groupid=${DCGRPID}
+        - vidid=${VIDID}
+        - i2cid=${I2CID}
+        - spiid=${SPIID}
+        - gpioid=${GPIOID}
+    image: 'ligpibase'
+    container_name: 'printzini'
+    user: ${DCUSERID}
+    devices:
+      - /dev/vchiq:/dev/vchiq
+      - /dev/vcsm:/dev/vcsm
+    volumes:
+      - /opt/vc/lib:/opt/vc/lib
+      - ${DCDATADIR}/logs/ultimonitor/:/home/lig/Ultimonitor/logs/
+      - ${DCDEVDIR}/config/ultimonitor.conf:/home/lig/Ultimonitor/config/ultimonitor.conf
+    restart: always
+    working_dir: /home/lig/Ultimonitor/
+    command: ["python3", "Printzini.py"]
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge

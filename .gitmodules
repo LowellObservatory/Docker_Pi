@@ -7,3 +7,6 @@
 [submodule "submodules/JohnnyFive"]
 	path = submodules/JohnnyFive
 	url = https://github.com/LowellObservatory/JohnnyFive
+[submodule "submodules/Ultimonitor"]
+	path = submodules/Ultimonitor
+	url = https://github.com/LowellObservatory/Ultimonitor
