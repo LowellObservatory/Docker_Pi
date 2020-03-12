@@ -1,4 +1,4 @@
-# Docker_PiMesa
+# Docker_Pi
 Repository of container files for Lowell codes running on various Raspberry Pis, 
 spread across Lowell Observatory.
 
