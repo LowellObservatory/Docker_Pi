@@ -38,12 +38,12 @@ services:
     ports:
       - 80:80
     volumes:
-      - ${DCDEVDIR}/../submodules/PiCamHelpers/www:/home/lig/www
+      - ${DCDEVDIR}/config/hancon.js:/home/lig/www/hancon.js
       - ${DCDATADIR}/snapper:/home/lig/www/snapshots
+      - ${DCDEVDIR}/../submodules/PiCamHelpers/www:/home/lig/www
 #      - ${DCDATADIR}/logs/snapper:/home/lig/snaps/logs/
       - ${DCDEVDIR}/config/nginx.conf:/etc/nginx/nginx.conf
       - ${DCDEVDIR}/config/nginx-app.conf:/etc/nginx/conf.d/default.conf
-      - ${DCDEVDIR}/config/hancon.js:/home/lig/www/hancon.js
     depends_on:
       - snapper
     restart: always
