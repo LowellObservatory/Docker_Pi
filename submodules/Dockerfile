@@ -47,7 +47,9 @@ WORKDIR /home/lig/ligmos
 RUN pip3 install -e .
 
 WORKDIR /home/lig/
+RUN mkdir /home/lig/www && mkdir /home/lig/snaps && mkdir /home/lig/snaps/anim
 COPY --chown=lig:lig ./PiCamHelpers ./PiCamHelpers
+COPY --chown=lig:lig ./PiCamHelpers/www/* /home/lig/www
 WORKDIR /home/lig/PiCamHelpers
 RUN pip3 install -e .
 
@@ -62,8 +64,8 @@ COPY --chown=lig:lig ./Ultimonitor ./Ultimonitor
 
 USER lig
 WORKDIR /home/lig
-RUN mkdir /home/lig/www/ && mkdir /home/lig/snaps/ && \
-    mkdir /home/lig/snaps/anim/ && mkdir /home/lig/logs && \
-    mkdir /home/lig/Ultimonitor/logs/ && mkdir /home/lig/Ultimonitor/ultisnaps/
+RUN mkdir /home/lig/logs && \
+    mkdir /home/lig/Ultimonitor/logs/ && \
+    mkdir /home/lig/Ultimonitor/ultisnaps/
 
 CMD ["/bin/bash"]
