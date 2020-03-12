@@ -49,7 +49,7 @@ RUN pip3 install -e .
 WORKDIR /home/lig/
 RUN mkdir /home/lig/www && mkdir /home/lig/snaps && mkdir /home/lig/snaps/anim
 COPY --chown=lig:lig ./PiCamHelpers ./PiCamHelpers
-COPY --chown=lig:lig ./PiCamHelpers/www/* /home/lig/www
+COPY --chown=lig:lig ./PiCamHelpers/www/* /home/lig/www/
 WORKDIR /home/lig/PiCamHelpers
 RUN pip3 install -e .
 
