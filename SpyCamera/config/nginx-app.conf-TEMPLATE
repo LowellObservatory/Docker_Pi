@@ -23,9 +23,9 @@ server {
     }
 
     # Remember: these paths are the ones in the container!
-    location /snapshots  {
+    location /snaps  {
         autoindex on;
-        alias /home/lig/www/snapshots/;
+        alias /home/lig/www/snaps/;
     }
 
     # Remember: these paths are the ones in the container!
