@@ -1,0 +1,8 @@
+ARG nginxver=mainline-alpine
+FROM nginx:${nginxver}
+
+USER root
+
+RUN mkdir /home/lig && mkdir /home/lig/www && mkdir /home/lig/snaps && mkdir /home/lig/snaps/anim
+COPY ./PiCamHelpers/www /home/lig/www
+

@@ -7,6 +7,8 @@
 #   Created by RTH
 #     2018/08/22
 
+export NGINX_VERSION="mainline-alpine"
+
 # NO COMMAS!!!
 #   This list is used to check/make the data storage directories
 #services=("chronograf" "influxdb" "telegraf" "lig")
@@ -43,6 +45,8 @@ echo "VIDID=$VIDID" >> .env
 echo "I2CID=$I2CID" >> .env
 echo "SPIID=$SPIID" >> .env
 echo "GPIOID=$GPIOID" >> .env
+echo "# Component versions to use" >> .env
+echo "NGINX_VERSION=$NGINX_VERSION" >> .env
 
 echo "./.env contents:"
 echo "==========="

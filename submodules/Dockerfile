@@ -47,9 +47,10 @@ WORKDIR /home/lig/ligmos
 RUN pip3 install -e .
 
 WORKDIR /home/lig/
+USER lig
 RUN mkdir /home/lig/www && mkdir /home/lig/snaps && mkdir /home/lig/snaps/anim
+USER root
 COPY --chown=lig:lig ./PiCamHelpers ./PiCamHelpers
-COPY --chown=lig:lig ./PiCamHelpers/www/* /home/lig/www/
 WORKDIR /home/lig/PiCamHelpers
 RUN pip3 install -e .
 
