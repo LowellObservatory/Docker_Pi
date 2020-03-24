@@ -45,7 +45,7 @@ services:
     volumes:
       - ${DCDEVDIR}/config/index.html:/home/lig/www/index.html
       - ${DCDEVDIR}/config/hancon.js:/home/lig/www/hancon.js
-      - ${DCDATADIR}/snapper:/home/lig/www/snapshots
+      - ${DCDATADIR}/snapper:/home/lig/www/snaps
       - ${DCDEVDIR}/config/nginx.conf:/etc/nginx/nginx.conf
       - ${DCDEVDIR}/config/nginx-app.conf:/etc/nginx/conf.d/default.conf
     depends_on:

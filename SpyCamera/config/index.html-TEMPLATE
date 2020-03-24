@@ -80,9 +80,9 @@
     <canvas id='14segClock' width="800" height="120"></canvas>
   </center>
   <center>
-  <a href="/snapshots/">Last 24 Hours</a>
+  <a href="/snaps/">Last 24 Hours</a>
   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-  <a href="/snapshots/anim">Last 24 Images</a>
+  <a href="/snaps/anim">Last 24 Images</a>
   </center>
   <br>
   <!-- HAniS weather sequence displayer -->
