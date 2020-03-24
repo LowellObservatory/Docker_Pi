@@ -20,7 +20,7 @@ DCUSERID=`getent passwd $USER | cut -d: -f3`
 DCGRPID=`getent passwd $USER | cut -d: -f4`
 DCDOCKERID=`getent group docker | cut -d: -f3`
 DOCKDATADIR="$HOME/DockerData/"
-DOCKDEVDIR="$HOME/Docker_PiMesa/Ultimonitor/"
+DOCKDEVDIR="$HOME/Docker_Pi/Ultimonitor/"
 
 # Rasperry Pi only!
 VIDID=`getent group video | cut -d: -f3`
