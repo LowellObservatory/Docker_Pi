@@ -10,6 +10,7 @@ RUN mkdir /home/lig/onewireTemps && \
     mkdir /home/lig/onewireTemps/logs
 
 WORKDIR /home/lig/onewireTemps
-COPY --chown=lig:lig . .  
+COPY --chown=lig:lig onewireTemps.py .  
+COPY --chown=lig:lig setPrecision.py .  
 
 CMD ["python", "onewireTemps.py"]

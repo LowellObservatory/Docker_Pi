@@ -22,6 +22,6 @@ hancon.js
 SpyCamera/config/index.html
 SpyCamera/config/nginx-app.conf
 SpyCamera/config/picamSettings.conf
-MesaTools/onewireTemps/config/dbconfig.conf
+MesaTools/config/dbconfig.conf
 MesaTools/onewireTemps/logs/*
 Ultimonitor/config/ultimonitor.conf
