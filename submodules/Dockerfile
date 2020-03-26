@@ -63,6 +63,10 @@ RUN pip3 install -e .
 WORKDIR /home/lig/
 COPY --chown=lig:lig ./Ultimonitor ./Ultimonitor
 
+# Mr Freeze requires no installation
+WORKDIR /home/lig
+COPY --chown=lig:lig ./MrFreeze ./MrFreeze
+
 USER lig
 WORKDIR /home/lig
 RUN mkdir /home/lig/logs && \

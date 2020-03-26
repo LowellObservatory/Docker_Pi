@@ -1,5 +1,28 @@
 version: '3'
 services:
+  gettempLOIS:
+    build:
+      context: '../submodules/'
+      dockerfile: Dockerfile
+      args:
+        - userid=${DCUSERID}
+        - groupid=${DCGRPID}
+        - vidid=${VIDID}
+        - i2cid=${I2CID}
+        - spiid=${SPIID}
+        - gpioid=${GPIOID}
+    image: 'ligpibase'
+    container_name: 'gettempLOIS'
+    user: ${DCUSERID}
+    volumes:
+      - ${DCDATADIR}/logs/mrfreeze/:/home/lig/MrFreeze/logs/
+      - ${DCDEVDIR}/config/mrfreeze.conf:/home/lig/MrFreeze/config/mrfreeze.conf
+    restart: always
+    working_dir: /home/lig/MrFreeze/
+    command: ["python3", "Nora.py"]
+    networks:
+      - default
+
   onewireTemps:
     build:
       context: './onewireTemps/'
@@ -16,6 +39,8 @@ services:
     restart: always
     working_dir: /home/lig/onewireTemps/
     command: ["python3", "onewireTemps.py"]
+    depends_on:
+      - gettempLOIS
     networks:
       - default
 

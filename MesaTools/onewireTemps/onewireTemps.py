@@ -30,7 +30,8 @@ def readAllSensors():
         print("Sensor %s (%s) has temperature %.2f" % (sid, sty, stp))
         fields.update({sid: stp})
 
-    pkt = utils.packetizer.makeInfluxPacket(meas=['temperatures'], fields=fields)
+    pkt = utils.packetizer.makeInfluxPacket(meas=['temperatures'],
+                                            fields=fields)
     print(pkt)
 
     return pkt
@@ -43,10 +44,10 @@ def main():
     confFile = './config/dbconfig.conf'
 
     # By doing it this way we ignore the 'enabled' key
-    #    but we avoid contortions needed if using 
+    #    but we avoid contortions needed if using
     #    utils.confparsers.parseConfig, so it's worth it
     dbSettings = utils.confparsers.rawParser(confFile)
-    dbSettings = workers.confUtils.assignConf(dbSettings['databaseSetup'], 
+    dbSettings = workers.confUtils.assignConf(dbSettings['databaseSetup'],
                                               utils.classes.baseTarget,
                                               backfill=True)
 
@@ -58,8 +59,8 @@ def main():
     # Set up our signal
     runner = utils.common.HowtoStopNicely()
 
-    idb = utils.database.influxobj(tablename=dbSettings.tablename, 
-                                   host=dbSettings.host, 
+    idb = utils.database.influxobj(tablename=dbSettings.tablename,
+                                   host=dbSettings.host,
                                    port=dbSettings.port,
                                    user=dbSettings.user,
                                    pw=dbSettings.password,
@@ -87,4 +88,3 @@ def main():
 if __name__ == "__main__":
     main()
     print("onewireTemps has exited!")
-

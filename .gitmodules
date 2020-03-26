@@ -10,3 +10,6 @@
 [submodule "submodules/Ultimonitor"]
 	path = submodules/Ultimonitor
 	url = https://github.com/LowellObservatory/Ultimonitor
+[submodule "submodules/MrFreeze"]
+	path = submodules/MrFreeze
+	url = https://github.com/LowellObservatory/MrFreeze
