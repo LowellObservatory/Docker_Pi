@@ -1,7 +1,7 @@
 kiwisolver==1.1.0
 numpy
 matplotlib
-astropy
+astropy==4.0
 pillow
 paramiko
 psutil
