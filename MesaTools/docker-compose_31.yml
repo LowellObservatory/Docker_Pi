@@ -1,0 +1,26 @@
+version: '3'
+services:
+  onewireTemps:
+    build:
+      context: './onewireTemps/'
+      dockerfile: Dockerfile
+    image: 'ligpibase-onewire'
+    container_name: 'onewireTemps'
+    user: ${DCUSERID}
+    privileged: true
+#    devices:
+#      - /sys/devices/w1_bus_master1:/sys/devices/w1_bus_master1
+    volumes:
+      - ${DCDATADIR}/logs/onewireTemps/:/home/lig/onewireTemps/logs/
+      - ${DCDEVDIR}/config/dbconfig.conf:/home/lig/onewireTemps/config/dbconfig.conf
+    restart: always
+    working_dir: /home/lig/onewireTemps/
+    command: ["python3", "onewireTemps.py"]
+    depends_on:
+      - gettempLOIS
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
