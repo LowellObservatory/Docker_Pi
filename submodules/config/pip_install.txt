@@ -2,7 +2,7 @@ kiwisolver==1.1.0
 numpy
 matplotlib
 astropy==4.0
-pillow
+pillow==7.0.0
 paramiko
 psutil
 pylint
