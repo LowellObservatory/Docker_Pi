@@ -39,7 +39,7 @@ USER lig
 USER root
 WORKDIR /home/lig/
 COPY --chown=lig:lig ./config/pip_install.txt .
-RUN pip3 install --no-cache-dir --default-timeout=100 -r pip_install.txt
+RUN pip3 install --no-cache-dir --default-timeout=500 -r pip_install.txt
 
 WORKDIR /home/lig/
 COPY --chown=lig:lig ./ligmos ./ligmos
