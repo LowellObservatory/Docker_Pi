@@ -78,7 +78,7 @@ def genEphem():
     sun.compute(site)
     mon.compute(site)
 
-    return round(math.degrees(sun.alt), 4), round(math.degrees(mon.alt), 4)
+    return round(math.degrees(sun.alt), 2), round(math.degrees(mon.alt), 2)
 
 
 def assembleEmail(emailConfig, picam, squashEmail=False):
@@ -100,18 +100,18 @@ def assembleEmail(emailConfig, picam, squashEmail=False):
     body += "\nSun Altitude (deg): %f\nMoon Altitude (deg): %f\n" % (sunalt,
                                                                      moonalt)
 
-    body += "\n\n"
+    body += "\n"
     body += "TODO: Query the database for 24h cryotiger health checks.\n"
-    body += "That'll get done...soon?\n\n"
+    body += "That'll get done...soon?"
+
+    # Now append the rest of the stuff if there is some
+    if emailConfig.footer is not None:
+        body += "\n\n"
+        body += str(emailConfig.footer)
 
     if emailConfig is not None and squashEmail is False:
         eFrom = emailConfig.user
         eTo = emailConfig.toaddr
-
-        # Now append the rest of the stuff if there is some
-        if emailConfig.footer is not None:
-            body += "\n\n"
-            body += str(emailConfig.footer)
 
         msg = j5.email.constructMail(subject, body, eFrom, eTo,
                                      fromname=emailConfig.fromname)
@@ -152,6 +152,7 @@ def main():
 
     # Create our actual schedule of when to send a picture
     #   NOTE: The time must match the timezone of the server!
+    #     (Which could be UTC already)
     sched = schedule.Scheduler()
     timesched = "14:30"
     sched.every().day.at(timesched).do(assembleEmail,
@@ -159,6 +160,7 @@ def main():
 
     while runner.halt is False:
         sched.run_pending()
+
         for job in sched.jobs:
             remaining = (job.next_run - dt.now()).total_seconds()
             print("    %s in %f seconds" % (job.tags, remaining))

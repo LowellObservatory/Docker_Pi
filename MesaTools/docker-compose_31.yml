@@ -14,6 +14,7 @@ services:
       - /opt/vc/lib:/opt/vc/lib
       - ${DCDATADIR}/logs/domeTattler/:/home/lig/domeTattler/logs/
       - ${DCDEVDIR}/config/domeTattler.conf:/home/lig/domeTattler/config/domeTattler.conf
+      - ${DCDEVDIR}/config/footer.txt:/home/lig/domeTattler/config/footer.txt
     restart: always
     working_dir: /home/lig/domeTattler/
     command: ["python3", "domeTattler.py"]
