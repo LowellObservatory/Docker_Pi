@@ -78,7 +78,10 @@ def genEphem():
 def assembleEmail(emailConfig, picam, squashEmail=False):
     """
     """
+    # Sometimes we have a server that's set up in UTC,
+    #   so we have to do dumb things so account for that
     when = dt.now()
+    when = when.astimezone(tz=pytz.timezone("Americas/Phoenix"))
     whendate = str(when.date())
     whenutc = when.astimezone(tz=pytz.timezone("UTC"))
 
@@ -133,7 +136,6 @@ def assembleEmail(emailConfig, picam, squashEmail=False):
 
 
 def main():
-    interval = 60
     squashEmail = False
 
     # Read in our config file
@@ -156,25 +158,11 @@ def main():
                                        email, picam, squashEmail=squashEmail)
 
     while runner.halt is False:
-        # Check our schedule to see if we have to do anything
-        sched.run_pending()
         for job in sched.jobs:
             remaining = (job.next_run - dt.now()).total_seconds()
             print("    %s in %f seconds" % (job.tags, remaining))
 
-        # Sleep for interval in 1 second increments
-        print("Sleeping for %f seconds..." % (interval))
-        i = 0
-        if runner.halt is False:
-            print("Starting a big sleep")
-            # Sleep for bigsleep, but in small chunks to check abort
-            for _ in range(interval):
-                time.sleep(1)
-                if (i + 1) % 30 == 0:
-                    print(".", end=None)
-                i += 1
-                if runner.halt is True:
-                    break
+        time.sleep(5)
 
 
 if __name__ == "__main__":
