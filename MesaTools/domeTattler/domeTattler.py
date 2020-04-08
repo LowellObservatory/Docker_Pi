@@ -148,9 +148,12 @@ def main():
     runner = common.HowtoStopNicely()
 
     # Create our actual schedule of when to send a picture
+    #   NOTE: The time must match the timezone of the server!
+    #   Convert yourself to UTC if you must, it's just easier.
     sched = schedule.Scheduler()
-    sched.every().day.at("22:05").do(assembleEmail,
-                                     email, picam, squashEmail=squashEmail)
+    timesched = "05:25"
+    sched.every().day.at(timesched).do(assembleEmail,
+                                       email, picam, squashEmail=squashEmail)
 
     while runner.halt is False:
         # Check our schedule to see if we have to do anything
