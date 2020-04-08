@@ -1,5 +1,22 @@
 version: '3'
 services:
+  domeTattler:
+    build:
+      context: './domeTattler/'
+      dockerfile: Dockerfile
+    image: 'ligpibase-domeTattler'
+    container_name: 'domeTattler'
+    user: ${DCUSERID}
+    privileged: true
+    volumes:
+      - ${DCDATADIR}/logs/domeTattler/:/home/lig/domeTattler/logs/
+      - ${DCDEVDIR}/config/domeTattler.conf:/home/lig/domeTattler/config/domeTattler.conf
+    restart: always
+    working_dir: /home/lig/domeTattler/
+    command: ["python3", "domeTattler.py"]
+    networks:
+      - default
+
   onewireTemps:
     build:
       context: './onewireTemps/'

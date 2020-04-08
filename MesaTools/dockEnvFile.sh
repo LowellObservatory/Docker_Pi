@@ -10,7 +10,7 @@
 # NO COMMAS!!!
 #   This list is used to check/make the data storage directories
 #services=("chronograf" "influxdb" "telegraf" "lig")
-services=("onewireTemps" "mrfreeze")
+services=("onewireTemps" "mrfreeze" "domeTattler")
 
 # If you're on OS X, `getent` isn't there because Apple didn't invent it,
 #   so they instead invented a horribly more complex replacement.
