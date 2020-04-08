@@ -155,6 +155,9 @@ def main():
     while runner.halt is False:
         # Check our schedule to see if we have to do anything
         sched.run_pending()
+        for job in sched.jobs:
+            remaining = (job.next_run - datetime.now()).total_seconds()
+            print("    %s in %f seconds" % (job.tags, remaining))
 
         # Sleep for interval in 1 second increments
         print("Sleeping for %f seconds..." % (interval))
