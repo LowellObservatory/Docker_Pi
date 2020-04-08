@@ -4,7 +4,7 @@ services:
     build:
       context: './domeTattler/'
       dockerfile: Dockerfile
-    image: 'ligpibase-domeTattler'
+    image: 'ligpibase-dometattler'
     container_name: 'domeTattler'
     user: ${DCUSERID}
     privileged: true
