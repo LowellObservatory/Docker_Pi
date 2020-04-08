@@ -149,14 +149,14 @@ def main():
 
     # Create our actual schedule of when to send a picture
     sched = schedule.Scheduler()
-    sched.every().day.at("07:30").do(assembleEmail,
+    sched.every().day.at("22:05").do(assembleEmail,
                                      email, picam, squashEmail=squashEmail)
 
     while runner.halt is False:
         # Check our schedule to see if we have to do anything
         sched.run_pending()
         for job in sched.jobs:
-            remaining = (job.next_run - datetime.now()).total_seconds()
+            remaining = (job.next_run - dt.now()).total_seconds()
             print("    %s in %f seconds" % (job.tags, remaining))
 
         # Sleep for interval in 1 second increments
