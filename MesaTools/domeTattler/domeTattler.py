@@ -158,6 +158,7 @@ def main():
                                        email, picam, squashEmail=squashEmail)
 
     while runner.halt is False:
+        sched.run_pending()
         for job in sched.jobs:
             remaining = (job.next_run - dt.now()).total_seconds()
             print("    %s in %f seconds" % (job.tags, remaining))
