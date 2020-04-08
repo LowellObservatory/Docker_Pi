@@ -81,7 +81,7 @@ def assembleEmail(emailConfig, picam, squashEmail=False):
     # Sometimes we have a server that's set up in UTC,
     #   so we have to do dumb things so account for that
     when = dt.now()
-    when = when.astimezone(tz=pytz.timezone("Americas/Phoenix"))
+    when = when.astimezone(tz=pytz.timezone("America/Phoenix"))
     whendate = str(when.date())
     whenutc = when.astimezone(tz=pytz.timezone("UTC"))
 
@@ -153,7 +153,7 @@ def main():
     #   NOTE: The time must match the timezone of the server!
     #   Convert yourself to UTC if you must, it's just easier.
     sched = schedule.Scheduler()
-    timesched = "05:27"
+    timesched = "06:02"
     sched.every().day.at(timesched).do(assembleEmail,
                                        email, picam, squashEmail=squashEmail)
 
