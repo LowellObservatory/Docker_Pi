@@ -15,8 +15,14 @@ Further description.
 
 from __future__ import division, print_function, absolute_import
 
+import math
 import time
 import imghdr
+from datetime import datetime as dt
+
+import pytz
+import ephem
+import schedule
 
 import johnnyfive as j5
 import picamhelpers as pch
@@ -49,13 +55,46 @@ def parseConf(confFile):
     return camSettings, emailSettings, databaseSettings
 
 
-def assembleEmail(emailConfig, picam):
+def genEphem():
     """
+    Hardcoded to generate relevant ephemeris info for
+    Anderson Mesa
     """
-    subject = "Dome Status"
-    body = "Fill me up"
+    # Set up the ephemera/observing site info for solar angles
+    site = ephem.Observer()
+    site.lat = '35.096944'
+    site.lon = '-111.535833'
+    site.elevation = 2163
+    site.name = "Lowell Observatory Anderson Mesa"
 
-    if emailConfig is not None:
+    sun = ephem.Sun()
+    mon = ephem.Moon()
+    sun.compute(site)
+    mon.compute(site)
+
+    return round(math.degrees(sun.alt), 4), round(math.degrees(mon.alt), 4)
+
+
+def assembleEmail(emailConfig, picam, squashEmail=False):
+    """
+    """
+    when = dt.now()
+    whendate = str(when.date())
+    whenutc = when.astimezone(tz=pytz.timezone("UTC"))
+
+    sunalt, moonalt = genEphem()
+
+    subject = "Dome Checkup: %s" % (whendate)
+
+    body = "Time (UTC): %s\n" % (whenutc.strftime("%Y%m%d %H:%M:%S"))
+    body += "Time (Local): %s\n" % (when.strftime("%Y%m%d %H:%M:%S"))
+    body += "\nSun Altitude (deg): %f\nMoon Altitude (deg): %f\n" % (sunalt,
+                                                                     moonalt)
+
+    body += "TODO: Query the database for 24h cryotiger health checks."
+    body += "That'll get done...soon?\n\n"
+
+    if emailConfig is not None and squashEmail is False:
         eFrom = emailConfig.user
         eTo = emailConfig.toaddr
 
@@ -65,10 +104,10 @@ def assembleEmail(emailConfig, picam):
         else:
             footer = str(emailConfig.footer)
 
-        # Now append the rest of the stuff
-        body += "\n\n"
-        body += footer
-        body += "\n\nYour 3D pal, \nThe Great Printzini"
+        # Now append the rest of the stuff if there is some
+        if footer != "":
+            body += "\n\n"
+            body += footer
 
         msg = j5.email.constructMail(subject, body, eFrom, eTo,
                                      fromname=emailConfig.fromname)
@@ -81,29 +120,21 @@ def assembleEmail(emailConfig, picam):
                     piimg = pisnap.read()
                     msg.add_attachment(piimg, maintype='image',
                                        subtype=imghdr.what(None, piimg),
-                                       filename="Dome31MorningCheck.png")
+                                       filename="DomeCheck.png")
             else:
                 print("PiCamera capture failed!")
 
-    return msg
-
-
-def morningSender(emailConfig, msg, squashEmail=False):
-    """
-    """
-    # If squashEmail is True, email will be None
-    if emailConfig is not None and squashEmail is False:
         j5.email.sendMail(msg,
                           smtploc=emailConfig.host,
                           port=emailConfig.port,
                           user=emailConfig.user,
                           passw=emailConfig.password)
-
         print("Email sent!")
 
 
 def main():
     interval = 60
+    squashEmail = False
 
     # Read in our config file
     confFile = './config/domeTattler.conf'
@@ -116,11 +147,16 @@ def main():
     # Set up our signal
     runner = common.HowtoStopNicely()
 
+    # Create our actual schedule of when to send a picture
+    sched = schedule.Scheduler()
+    sched.every().day.at("07:30").do(assembleEmail,
+                                     email, picam, squashEmail=squashEmail)
+
     while runner.halt is False:
-        # Schedule the email for the morning
+        # Check our schedule to see if we have to do anything
+        sched.run_pending()
 
-
-        # Sleep for sleeptime in 1 second intervals
+        # Sleep for interval in 1 second increments
         print("Sleeping for %f seconds..." % (interval))
         i = 0
         if runner.halt is False:
