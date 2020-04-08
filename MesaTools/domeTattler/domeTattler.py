@@ -109,9 +109,9 @@ def assembleEmail(emailConfig, picam, squashEmail=False):
         eTo = emailConfig.toaddr
 
         # Now append the rest of the stuff if there is some
-        if footer is not None:
+        if emailConfig.footer is not None:
             body += "\n\n"
-            body += str(footer)
+            body += str(emailConfig.footer)
 
         msg = j5.email.constructMail(subject, body, eFrom, eTo,
                                      fromname=emailConfig.fromname)
@@ -154,7 +154,7 @@ def main():
     #   NOTE: The time must match the timezone of the server!
     #   Convert yourself to UTC if you must, it's just easier.
     sched = schedule.Scheduler()
-    timesched = "06:20"
+    timesched = "06:33"
     sched.every().day.at(timesched).do(assembleEmail,
                                        email, picam, squashEmail=squashEmail)
 
