@@ -154,7 +154,7 @@ def main():
     #   NOTE: The time must match the timezone of the server!
     #   Convert yourself to UTC if you must, it's just easier.
     sched = schedule.Scheduler()
-    timesched = "06:33"
+    timesched = "06:40"
     sched.every().day.at(timesched).do(assembleEmail,
                                        email, picam, squashEmail=squashEmail)
 
