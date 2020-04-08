@@ -7,8 +7,11 @@ services:
     image: 'ligpibase-dometattler'
     container_name: 'domeTattler'
     user: ${DCUSERID}
-    privileged: true
+    devices:
+      - /dev/vchiq:/dev/vchiq
+      - /dev/vcsm:/dev/vcsm
     volumes:
+      - /opt/vc/lib:/opt/vc/lib
       - ${DCDATADIR}/logs/domeTattler/:/home/lig/domeTattler/logs/
       - ${DCDEVDIR}/config/domeTattler.conf:/home/lig/domeTattler/config/domeTattler.conf
     restart: always
