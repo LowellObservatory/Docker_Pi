@@ -165,8 +165,8 @@ def main():
 
         for job in sched.jobs:
             remaining = (job.next_run - dt.now()).total_seconds()
-            if int(round(remaining, 0)) % 30 == 0 or remaining <= 15:
-                print("    %s in %f seconds" % (job.tags, remaining))
+            if int(round(remaining, 0)) % 300 == 0 or remaining <= 15:
+                print("    %s in %.2f minutes" % (job.tags, remaining/60.))
 
         time.sleep(1)
 
