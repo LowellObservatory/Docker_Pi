@@ -24,5 +24,8 @@ SpyCamera/config/nginx-app.conf
 SpyCamera/config/picamSettings.conf
 MesaTools/config/dbconfig.conf
 MesaTools/config/mrfreeze.conf
+MesaTools/config/domeTattler.conf
+MesaTools/config/footer.txt
+MesaTools/docker-compose.yml
 MesaTools/onewireTemps/logs/*
 Ultimonitor/config/ultimonitor.conf
