@@ -49,6 +49,12 @@ def parseConf(confFile):
     camSettings = confUtils.assignConf(pconf, pch.classes.piCamSettings)
 
     emailSettings = confUtils.assignConf(econf, j5.classes.emailSNMP)
+    # Read in the footer file as a text string
+    try:
+        with open(emailSettings.footer, 'r') as f:
+            emailSettings.footer = f.read()
+    except (OSError, IOError):
+        emailSettings.footer = None
 
     databaseSettings = confUtils.assignConf(dconf, lc.databaseQuery)
 
@@ -94,23 +100,18 @@ def assembleEmail(emailConfig, picam, squashEmail=False):
     body += "\nSun Altitude (deg): %f\nMoon Altitude (deg): %f\n" % (sunalt,
                                                                      moonalt)
 
-    body += "TODO: Query the database for 24h cryotiger health checks."
+    body += "\n\n"
+    body += "TODO: Query the database for 24h cryotiger health checks.\n"
     body += "That'll get done...soon?\n\n"
 
     if emailConfig is not None and squashEmail is False:
         eFrom = emailConfig.user
         eTo = emailConfig.toaddr
 
-        # Read in the footer, if there is one
-        if emailConfig.footer is None:
-            footer = ""
-        else:
-            footer = str(emailConfig.footer)
-
         # Now append the rest of the stuff if there is some
-        if footer != "":
+        if footer is not None:
             body += "\n\n"
-            body += footer
+            body += str(footer)
 
         msg = j5.email.constructMail(subject, body, eFrom, eTo,
                                      fromname=emailConfig.fromname)
@@ -153,7 +154,7 @@ def main():
     #   NOTE: The time must match the timezone of the server!
     #   Convert yourself to UTC if you must, it's just easier.
     sched = schedule.Scheduler()
-    timesched = "06:02"
+    timesched = "06:20"
     sched.every().day.at(timesched).do(assembleEmail,
                                        email, picam, squashEmail=squashEmail)
 
