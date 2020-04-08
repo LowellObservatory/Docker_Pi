@@ -155,17 +155,20 @@ def main():
     #     (Which could be UTC already)
     sched = schedule.Scheduler()
     timesched = "14:30"
+    schedTag = "MorningDomeCheck"
     sched.every().day.at(timesched).do(assembleEmail,
-                                       email, picam, squashEmail=squashEmail)
+                                       email, picam,
+                                       squashEmail=squashEmail).tag(schedTag)
 
     while runner.halt is False:
         sched.run_pending()
 
         for job in sched.jobs:
             remaining = (job.next_run - dt.now()).total_seconds()
-            print("    %s in %f seconds" % (job.tags, remaining))
+            if int(round(remaining, 0)) % 30 == 0 or remaining <= 15:
+                print("    %s in %f seconds" % (job.tags, remaining))
 
-        time.sleep(5)
+        time.sleep(1)
 
 
 if __name__ == "__main__":
