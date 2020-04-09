@@ -1,6 +1,7 @@
 cryptography==2.8
 kiwisolver==1.1.0
 numpy
+pandas
 matplotlib
 astropy==4.0
 pillow==7.0.0
