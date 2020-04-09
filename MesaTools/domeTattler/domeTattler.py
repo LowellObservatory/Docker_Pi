@@ -21,15 +21,14 @@ import imghdr
 from datetime import datetime as dt
 
 import pytz
-import ephem
 import schedule
 
 import johnnyfive as j5
 import picamhelpers as pch
 
-from ligmos.utils import logs, common
 from ligmos.utils import confparsers
 from ligmos.utils import classes as lc
+from ligmos.utils import logs, common, ephemera
 from ligmos.workers import confUtils
 
 
@@ -61,26 +60,6 @@ def parseConf(confFile):
     return camSettings, emailSettings, databaseSettings
 
 
-def genEphem():
-    """
-    Hardcoded to generate relevant ephemeris info for
-    Anderson Mesa
-    """
-    # Set up the ephemera/observing site info for solar angles
-    site = ephem.Observer()
-    site.lat = '35.096944'
-    site.lon = '-111.535833'
-    site.elevation = 2163
-    site.name = "Lowell Observatory Anderson Mesa"
-
-    sun = ephem.Sun()
-    mon = ephem.Moon()
-    sun.compute(site)
-    mon.compute(site)
-
-    return round(math.degrees(sun.alt), 2), round(math.degrees(mon.alt), 2)
-
-
 def assembleEmail(emailConfig, picam, squashEmail=False):
     """
     """
@@ -91,7 +70,9 @@ def assembleEmail(emailConfig, picam, squashEmail=False):
     whendate = str(when.date())
     whenutc = when.astimezone(tz=pytz.timezone("UTC"))
 
-    sunalt, moonalt = genEphem()
+    mesa = ephemera.observingSite(sitename='mesa')
+    sunalt = round(mesa.sunmoon.sun_alt, 2)
+    moonalt = round(mesa.sunmoon.moon_alt, 2)
 
     subject = "Dome Checkup: %s" % (whendate)
 
@@ -152,7 +133,7 @@ def main():
 
     # Create our actual schedule of when to send a picture
     #   NOTE: The time must match the timezone of the server!
-    #     (Which could be UTC already)
+    #     (which could be UTC already)
     sched = schedule.Scheduler()
     timesched = "14:30"
     schedTag = "MorningDomeCheck"
