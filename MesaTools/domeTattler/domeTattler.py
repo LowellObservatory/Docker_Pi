@@ -52,7 +52,12 @@ def parseConf(confFile):
     try:
         with open(emailSettings.footer, 'r') as f:
             emailSettings.footer = f.read()
+        print("Email footer found!")
+        print("===")
+        print(emailSettings.footer)
+        print("===")
     except (OSError, IOError):
+        print("Email footer not found! Moving on...")
         emailSettings.footer = None
 
     databaseSettings = confUtils.assignConf(dconf, lc.databaseQuery)
