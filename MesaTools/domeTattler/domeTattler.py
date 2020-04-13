@@ -126,13 +126,13 @@ def assembleEmail(emailConfig, picam, squashEmail=False):
 def main():
     squashEmail = False
 
+    # Start logging to a file
+    logs.setup_logging(logName="./logs/domeTattler.log", nLogs=10)
+
     # Read in our config file
     confFile = './config/domeTattler.conf'
 
     picam, email, db = parseConf(confFile)
-
-    # Start logging to a file
-    logs.setup_logging(logName="./logs/domeTattler.log", nLogs=10)
 
     # Set up our signal
     runner = common.HowtoStopNicely()
