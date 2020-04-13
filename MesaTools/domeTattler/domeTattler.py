@@ -78,7 +78,8 @@ def assembleEmail(emailConfig, picam, squashEmail=False):
 
     body = "Time (UTC): %s\n" % (whenutc.strftime("%Y%m%d %H:%M:%S"))
     body += "Time (Local): %s\n" % (when.strftime("%Y%m%d %H:%M:%S"))
-    body += "\nSun Altitude (deg): %.2f " % (sunalt)
+    body += "\n"
+    body += "Sun Altitude (deg): %.2f\n" % (sunalt)
     body += "Moon Altitude (deg): %.2f\n" % (moonalt)
 
     body += "\n"
