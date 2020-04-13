@@ -15,7 +15,7 @@ user = None
 password = None
 fromname = printzini@address.domain
 toaddr = email@address.domain
-footer = footer.txt
+footer = config/footer.txt
 enabled=True
 
 
