@@ -1,3 +1,11 @@
+[tattleConfig]
+notificationTime = 14:30
+camkey = picam
+emailkey = email
+querykey = q_example
+queryprocessing = theNameOfYourQueryPostProcessingFunction
+
+
 [databaseSetup]
 type = influxdb
 host = dbhostname
@@ -6,6 +14,17 @@ user = None
 password = None
 tablename = YourTableName
 enabled = True
+
+
+[q_example]
+database = databaseSetup
+tablename = YourTableName
+metricname = YourMetricName
+fields = field1, field2
+fieldlabels = field1Label, field2Label
+tagnames = None
+tagvals = None
+rangehours = 24
 
 
 [email]
