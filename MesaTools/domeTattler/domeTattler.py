@@ -222,7 +222,8 @@ def main():
         print("WARNING: Logging setup failed!")
         print(str(err))
 
-    confFile = 'MesaTools/domeTattler/domeTattler.conf'
+    # confFile = 'MesaTools/domeTattler/domeTattler.conf'
+    confFile = './config/domeTattler.conf'
     dtconfig, picam, email, dbq = parseConf(confFile)
 
     # This is the name of the function that should already exist either
