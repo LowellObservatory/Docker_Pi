@@ -120,8 +120,8 @@ def mesacryotiger(qstr, pdata):
     """
     # Query specific manipulations
     tstr = "\nCryotiger Status\n"
-    tstr += "Searching between %s and %s, " % (pdata[qstr].index.min(),
-                                               pdata[qstr].index.max())
+    tstr += "%s to %s, " % (pdata[qstr].index.min(),
+                            pdata[qstr].index.max())
     tstr += "%d records found.\n" % (len(pdata[qstr]['CompressorTemp']))
 
     cstr = "Compressor:"
