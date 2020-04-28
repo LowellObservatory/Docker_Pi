@@ -119,7 +119,7 @@ def mesacryotiger(qstr, pdata):
     the database keys changing from the hardcoded names.
     """
     # Query specific manipulations
-    tstr = "\nCryotiger Status\n"
+    tstr = "\nCryotiger Status:\n"
     tstr += "%s to %s, " % (pdata[qstr].index.min(),
                             pdata[qstr].index.max())
     tstr += "%d records found.\n" % (len(pdata[qstr]['CompressorTemp']))
