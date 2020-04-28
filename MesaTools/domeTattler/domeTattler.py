@@ -213,7 +213,7 @@ def assembleEmail(emailConfig, picam,
 
 def main():
     debug = True
-    squashEmail = True
+    squashEmail = False
 
     # Start logging to a file
     try:
