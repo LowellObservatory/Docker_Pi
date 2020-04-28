@@ -30,3 +30,6 @@ MesaTools/config/footer.txt
 MesaTools/docker-compose.yml
 MesaTools/onewireTemps/logs/*
 Ultimonitor/config/ultimonitor.conf
+MesaTools/domeTattler/config/domeTattler.conf
+MesaTools/domeTattler/domeTattler.conf
+MesaTools/domeTattler/logs/domeTattler.log
