@@ -8,7 +8,7 @@
 #     2018/08/22
 
 # Desired component versions, hardcoded for production & stability
-export INFLUXDB_VERSION="1.7.10"
+export INFLUXDB_VERSION="1.8.0"
 
 # NO COMMAS!!!
 #   This list is used to check/make the data storage directories

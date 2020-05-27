@@ -1,0 +1,23 @@
+ARG influxver=1.8.0
+FROM influxdb:${influxver}
+
+USER root
+
+ARG userid="1000"
+ARG groupid="1000"
+
+# Remove the existing influx user and group
+#RUN userdel influx && groupdel influx
+
+# Add a new one that matches our desired uid/gid
+RUN addgroup --gid ${groupid} influx && \
+    adduser influx --uid ${userid} --gid ${groupid} \
+    --gecos '' --disabled-password
+
+# Fix the permissions
+RUN chown -R influx:influx /var/lib/influxdb/
+RUN chown -R influx:influx /var/log/influxdb/
+
+USER influx
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["influxd"]

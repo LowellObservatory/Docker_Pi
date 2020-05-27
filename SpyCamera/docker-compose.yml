@@ -30,7 +30,7 @@ services:
     working_dir: /home/lig/PiCamHelpers/
     command: ["python3", "snapper.py"]
     networks:
-      - default
+      - ligDockernetPub
 
   nginx:
     build:
@@ -52,8 +52,8 @@ services:
       - snapper
     restart: always
     networks:
-      - default
+      - ligDockernetPub
 
 networks:
-  default:
-    driver: bridge
+    ligDockernetPub:
+      external: true

@@ -19,7 +19,7 @@ services:
     working_dir: /home/lig/domeTattler/
     command: ["python3", "domeTattler.py"]
     networks:
-      - default
+      - ligDockernetPub
 
   onewireTemps:
     build:
@@ -38,8 +38,8 @@ services:
     working_dir: /home/lig/onewireTemps/
     command: ["python3", "onewireTemps.py"]
     networks:
-      - default
+      - ligDockernetPub
 
 networks:
-  default:
-    driver: bridge
+    ligDockernetPub:
+      external: true
