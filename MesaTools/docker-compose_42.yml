@@ -21,7 +21,7 @@ services:
     working_dir: /home/lig/MrFreeze/
     command: ["python3", "Nora.py"]
     networks:
-      - default
+      - ligDockernetPub
 
   onewireTemps:
     build:
@@ -42,8 +42,8 @@ services:
     depends_on:
       - gettempLOIS
     networks:
-      - default
+      - ligDockernetPub
 
 networks:
-  default:
-    driver: bridge
+    ligDockernetPub:
+      external: true
